@@ -134,15 +134,19 @@ footer{margin-top:18px;text-align:center;color:#455667;font-size:9px;letter-spac
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
 .footer-credit {
-    margin-top: 22px;
-    text-align: center;
-    font-size: 10px;
-    color: var(--text3);
-    opacity: 0.65;
-    letter-spacing: 0.04em;
-    line-height: 1.6;
+    width: 100% !important;
+    margin-top: 18px !important;
+    text-align: center !important;
+    font-size: 10px !important;
+    color: #506070 !important;
+    opacity: 0.65 !important;
+    letter-spacing: 0.04em !important;
+    line-height: 1.6 !important;
 }
 
 .footer-credit span {
-    display: block;
+    display: block !important;
+    font-size: 10px !important;
+    color: #506070 !important;
+    text-align: center !important;
 }

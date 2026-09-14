@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f1319" />
+  <meta name="description" content="Beyblade X Point Buy — Deck Builder" />
+  <title>BBX Point Buy — KX</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="ambient-grid" aria-hidden="true"></div>
+  <main class="page-shell">
+    <section class="app-card silk-in">
+      <header class="topbar">
+        <div class="brand-block">
+          <div class="eyebrow"><span class="eyebrow-dot"></span>BEYBLADE X</div>
+          <h1>Point Buy</h1>
+        </div>
+        <div class="meta-block">
+          <div><strong id="bladeCount">–</strong> Blades</div>
+          <div id="dataStatus">Daten werden geladen…</div>
+        </div>
+      </header>
+
+      <section class="budget-switcher" id="budgetPresets" aria-label="Punktebudget">
+        <button data-budget="15"><strong>15</strong><small>LOW</small></button>
+        <button class="active recommended" data-budget="18"><strong>18</strong><small>EMPF.</small></button>
+        <button data-budget="21"><strong>21</strong><small>HIGH</small></button>
+        <button data-budget="28"><strong>28</strong><small>MAX</small></button>
+        <button id="customBudgetBtn"><strong>frei</strong><small>1–28</small></button>
+      </section>
+
+      <div class="custom-budget" id="customBudgetWrap" hidden>
+        <div>
+          <span class="custom-title">Freies Budget</span>
+          <span class="custom-sub">1 bis 28 Punkte</span>
+        </div>
+        <div class="custom-controls">
+          <input id="customBudget" type="number" min="1" max="28" value="18" inputmode="numeric" />
+          <button id="applyCustomBudget">Übernehmen</button>
+        </div>
+      </div>
+
+      <section class="score-card">
+        <div class="score-glow" aria-hidden="true"></div>
+        <div class="score-row">
+          <div class="score-wrap">
+            <div class="score-label">VERBRAUCHT</div>
+            <div class="score"><span id="usedPoints">0</span><span class="slash">/</span><span id="budgetDisplay">18</span></div>
+          </div>
+          <div class="selection-pill"><span class="dot"></span><span id="selectedCount">0</span> / 3 Blades</div>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+        <div id="budgetMessage" class="budget-message">Wähle drei Blades.</div>
+      </section>
+
+      <section class="slots" id="slots" aria-label="Blade Auswahl"></section>
+
+      <section class="actions" aria-label="Aktionen">
+        <button id="randomBtn" class="primary">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4Z"/><path d="m5 7 7 4 7-4M12 11v10"/></svg></span>
+          <span>Zufall</span>
+        </button>
+        <button id="maxBtn">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M13 2 5 14h6l-1 8 9-13h-6V2Z"/></svg></span>
+          <span>Ausreizen</span>
+        </button>
+        <button id="copyBtn">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="11" height="11" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg></span>
+          <span>Kopieren</span>
+        </button>
+        <button id="clearBtn">
+          <span class="action-icon"><svg viewBox="0 0 24 24"><path d="M4 4v6h6"/><path d="M6.5 17.5A8 8 0 1 0 5 8.5L4 10"/></svg></span>
+          <span>Leeren</span>
+        </button>
+      </section>
+
+      <div class="lower-panels">
+        <section class="drawer">
+          <button class="drawer-toggle" data-drawer="graph" aria-expanded="false">
+            <span class="drawer-icon"><svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19H2"/></svg></span>
+            <span class="drawer-copy"><strong>Punkteverteilung</strong><small>Verteilung der Blades nach Kostenstufe</small></span>
+            <span class="chevron"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
+          </button>
+          <div id="drawer-graph" class="drawer-content" hidden>
+            <div class="drawer-inner">
+              <div class="drawer-head">
+                <div>
+                  <div class="eyebrow"><span class="eyebrow-dot"></span>META ÜBERSICHT</div>
+                  <h2>Punkteverteilung</h2>
+                </div>
+                <div class="legend">Blades pro Kostenstufe</div>
+              </div>
+              <div id="distributionChart" class="chart"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="drawer">
+          <button class="drawer-toggle" data-drawer="rules" aria-expanded="false">
+            <span class="drawer-icon"><svg viewBox="0 0 24 24"><path d="M6 3h12v18H6z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg></span>
+            <span class="drawer-copy"><strong>Regeln & Punktevergabe</strong><small>Hinweise für Orga und Spieler</small></span>
+            <span class="chevron"><svg viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span>
+          </button>
+          <div id="drawer-rules" class="drawer-content" hidden>
+            <div class="drawer-inner rules-grid">
+              <article class="rule-card">
+                <span class="rule-kicker">FÜR DIE ORGA</span>
+                <h3>Budget frei wählen</h3>
+                <p>Jedes Turnier wählt die verteilbaren Punkte frei.</p>
+                <ul>
+                  <li><strong>15</strong> war die Orientierung bei der Erstellung – Low Meta.</li>
+                  <li><strong>18</strong> ist die Empfehlung, wirkt am interessantesten.</li>
+                  <li><strong>28</strong> ist das Maximum – drunter bleiben, sonst gibt's keine Meta-Anpassung.</li>
+                </ul>
+              </article>
+              <article class="rule-card accent-rule">
+                <span class="rule-kicker">FÜR DIE SPIELER</span>
+                <h3>Drei Blades, ein Budget</h3>
+                <p>Achtet auf die Punkte eurer Orga. Drei Blades, Summe muss ins Budget passen.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <footer>Made by KX</footer>
+    </section>
+  </main>
+
+  <div id="bladeModal" class="modal" hidden>
+    <div class="modal-backdrop" data-close-modal></div>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-head">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span>BLADE AUSWÄHLEN</div>
+          <h2 id="modalTitle">Blade wählen</h2>
+        </div>
+        <button class="icon-btn" data-close-modal aria-label="Schließen">×</button>
+      </div>
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="bladeSearch" class="search" type="search" placeholder="Blade suchen…" autocomplete="off" />
+      </div>
+      <div id="bladeList" class="blade-list"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -133,9 +133,16 @@ footer{margin-top:18px;text-align:center;color:#455667;font-size:9px;letter-spac
   .page-shell{padding:24px 12px 20px}.topbar{align-items:flex-start}.brand-block h1{font-size:26px}.meta-block{max-width:170px}.budget-switcher{gap:3px}.budget-switcher strong{font-size:16px}.budget-switcher small{font-size:8px}.score-card{padding:18px 15px 14px}.score #usedPoints{font-size:49px}.selection-pill{font-size:10px;padding:7px 9px}.slot{grid-template-columns:24px 1fr auto 24px;padding:8px 10px}.slot-name{font-size:14px}.actions{grid-template-columns:repeat(2,1fr)}.actions button{min-height:64px}.rules-grid{grid-template-columns:1fr}.custom-budget{align-items:flex-start;flex-direction:column}.custom-controls{width:100%}.custom-budget input{flex:1}.custom-budget button{flex:1}.drawer-copy small{display:none}
 }
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
-.inspired-credit {
-  margin-top: 3px;
-  font-size: 10px;
-  opacity: 0.45;
-  letter-spacing: 0.04em;
+.footer-credit {
+    margin-top: 22px;
+    text-align: center;
+    font-size: 10px;
+    color: var(--text3);
+    opacity: 0.65;
+    letter-spacing: 0.04em;
+    line-height: 1.6;
+}
+
+.footer-credit span {
+    display: block;
 }
